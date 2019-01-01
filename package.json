@@ -7,6 +7,8 @@
     "build": "vue-cli-service build"
   },
   "dependencies": {
+    "firebase": "^5.7.2",
+    "spectre.css": "^0.5.8",
     "vue": "^2.5.21"
   },
   "devDependencies": {
