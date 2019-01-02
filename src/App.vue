@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" class="container grid-sm">
     <DryEraseBoard />
   </div>
 </template>
@@ -16,11 +16,38 @@ export default {
 </script>
 
 <style lang="scss">
+body {
+  background-color: #f9f9f9;
+}
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
   margin-top: 60px;
+}
+.card {
+  transition: all .25s ease-out;
+  background: transparent;
+  border-color: transparent;
+  border-left-color: #de0d65;
+  border-left-width: .1rem;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+
+  &:hover {
+    background: #FFF;
+    // border-color: #dadee4;
+  }
+}
+
+.post {
+  margin: 2rem 0 4rem;
+  hr {
+    border: none;
+    border-top: 2px solid #de0d65;
+    width: 10%;
+    margin: 0 0 1rem;
+  }
 }
 </style>
