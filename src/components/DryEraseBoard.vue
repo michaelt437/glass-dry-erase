@@ -13,9 +13,10 @@
     <button class="btn btn-primary" type="button" name="button" @click="post">Post</button>
     <br>
     <DryErasePost
-      v-for="post in posts"
-      :key="post.title"
-      :post="post" />
+      v-for="(post, i) in posts"
+      :id="`post-${i}`"
+      :post="post"
+      @deletePost="deletePost"/>
   </div>
 </template>
 
@@ -36,23 +37,37 @@ export default {
     }
   },
   methods: {
+    clearFields() {
+      this.title = '';
+      this.content = '';
+    },
     post() {
-      namesRef.child(this.postId).set({
+      namesRef.child(`post-${this.postId}`).set({
         title: this.title,
         content: this.content,
         date: this.$moment().format('ll')
-      })
-      this.title = '';
-      this.content = '';
+      });
+      this.clearFields();
+    },
+    deletePost(id) {
+      namesRef.child(id).remove()
     }
   },
   created() {
+    const Http = new XMLHttpRequest();
+    const url = "https://glass-dry-erase.firebaseio.com/posts.json";
     namesRef.on('value', (snapshot) => {
-      console.log('the snapshot', JSON.stringify(snapshot.val(), null, 2))
-      let postIdArr = Object.keys(snapshot.val());
-      this.postId = postIdArr.length ?  postIdArr.length : 0;
-      this.posts = snapshot.val().reverse();
+      Http.open("GET", url);
+      Http.send();
+      Http.onreadystatechange = (e) => {
+        if(Http.readyState === 4 && Http.status === 200) {
+          console.log(Object.keys(JSON.parse(Http.response)).length)
+          this.postId = Object.keys(JSON.parse(Http.response)).length;
+          this.posts = JSON.parse(Http.response)
+        }
+      }
     })
+
   }
 }
 </script>

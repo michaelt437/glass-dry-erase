@@ -17,8 +17,10 @@
     <div class="my-2">
       {{ post.content }}
     </div>
-    <div class="my-2">
+    <div class="post__footer my-2">
       <small><i>{{ post.date }}</i></small>
+      <div class="flex-spacer"></div>
+      <i class="icon icon-delete" @click="$emit('deletePost', postId)"></i>
     </div>
   </div>
 </template>
@@ -30,6 +32,10 @@ export default {
     post: {
       type: Object,
       required: true
+    },
+    postId: {
+      type: Number,
+      required: false
     }
   },
   data() {

@@ -49,5 +49,12 @@ body {
     width: 10%;
     margin: 0 0 1rem;
   }
+  &__footer {
+    display: flex;
+  }
+}
+
+.flex-spacer {
+  flex-grow: 1;
 }
 </style>

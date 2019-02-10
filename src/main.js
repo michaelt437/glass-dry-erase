@@ -1,4 +1,5 @@
 import Spectre from 'spectre.css'
+import icons from 'spectre.css/dist/spectre-icons.min.css'
 import './firebase'
 import Vue from 'vue'
 import App from './App.vue'
