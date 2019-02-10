@@ -10,6 +10,11 @@
       <textarea class="form-input" id="input-example-3" placeholder="" rows="8" v-model="content"></textarea>
     </div>
     <br>
+    <div class="form-group">
+      <label for="input-example-2" class="form-label">Tags</label>
+      <input type="text" id="input-example-2" class="form-input" v-model="tagsInput">
+    </div>
+    <br>
     <button class="btn btn-primary" type="button" name="button" @click="post">Post</button>
     <br>
     <DryErasePost
@@ -33,7 +38,8 @@ export default {
       title: '',
       content: '',
       postId: 0,
-      posts: {}
+      posts: {},
+      tagsInput: ''
     }
   },
   methods: {
@@ -41,17 +47,34 @@ export default {
       this.title = '';
       this.content = '';
     },
+    reset() {
+      this.title = '';
+      this.content = '';
+      this.tagsInput = '';
+    },
     post() {
       namesRef.child(`post-${this.postId}`).set({
         title: this.title,
         content: this.content,
-        date: this.$moment().format('ll')
+        date: this.$moment().format('ll'),
+        tags: this.tags
       });
-      this.clearFields();
+      this.reset();
     },
     deletePost(id) {
       namesRef.child(id).remove()
     }
+  },
+  computed: {
+    tags() {
+      if(this.tagsInput != '') {
+        let tags = this.tagsInput.split(',');
+        tags = tags.map(tag => tag.trim())
+        return tags;
+      }else{
+        return null;
+      }
+    },
   },
   created() {
     const Http = new XMLHttpRequest();

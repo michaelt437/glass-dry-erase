@@ -18,12 +18,14 @@ export default {
 <style lang="scss">
 body {
   background-color: #f9f9f9;
+  background-color: #222532;
 }
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
+  color: #FFF;
   margin-top: 60px;
 }
 .card {
@@ -45,8 +47,8 @@ body {
   margin: 2rem 0 4rem;
   hr {
     border: none;
-    border-top: 2px solid #de0d65;
-    width: 10%;
+    border-top: 3px solid #de0d65;
+    width: 5%;
     margin: 0 0 1rem;
   }
   &__footer {
@@ -56,5 +58,11 @@ body {
 
 .flex-spacer {
   flex-grow: 1;
+}
+
+.chip {
+  margin-left: 0;
+  margin-right: .2rem;
+  border-radius: 0;
 }
 </style>
